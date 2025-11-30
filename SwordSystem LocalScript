@@ -1,0 +1,44 @@
+local UserInputService = game:GetService("UserInputService")
+
+local equippedRemote = script.Parent.Parent.Parent.Remotes["Equip/Unequip"]
+local blockRemote = script.Parent.Parent.Parent.Remotes.Block
+local slashRemote = script.Parent.Parent.Parent.Remotes.Slash
+local specialRemote = script.Parent.Parent.Parent.Remotes.Special
+
+--Number 1 clicked Detection
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.KeyCode == Enum.KeyCode.One then
+		equippedRemote:FireServer()
+	end
+end)
+
+--Left Click Detection
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		slashRemote:FireServer()
+	end
+end)
+
+--Right Click Detection
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.UserInputType == Enum.UserInputType.MouseButton2 then
+		blockRemote:FireServer(true)
+	end
+end)
+UserInputService.InputEnded:Connect(function(input, gpe)
+	if gpe then return end
+	if input.UserInputType == Enum.UserInputType.MouseButton2 then
+		blockRemote:FireServer(false)
+	end
+end)
+
+--Keyboard Letter "E" pressed Detection
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.KeyCode == Enum.KeyCode.E then
+		specialRemote:FireServer()
+	end
+end)
